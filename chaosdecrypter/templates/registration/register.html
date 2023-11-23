@@ -1,0 +1,80 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} Register | SU11 {% endblock title%}</title>
+
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body class="color-theme-red">
+
+    <div class="preloader"></div>
+
+    <div class="main-wrap">
+
+        <div class="nav-header bg-transparent shadow-none border-0">
+            <div class="nav-top w-100">
+                <span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xxl logo-text mb-0">SU11. </span>
+            </div>
+        </div>
+
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-xl-4 vh-100 align-items-center d-flex bg-white rounded-3 overflow-hidden">
+                <div class="card shadow-none border-0 ms-auto me-auto login-card">
+                    <div class="card-body rounded-0 text-left">
+                        <h2 class="fw-700 font-xl display2-md-size mb-4 text-center">Create your account</h2>                        
+                        <form method="post">
+                            {% csrf_token %}
+                            
+                            {{ form.errors.username }}
+                            <div class="form-group icon-input mb-3">
+                                <i class="font-sm ti-user text-grey-500 pe-0"></i>
+                                {{ form.username }}
+                            </div>
+                            <div class="form-group icon-input mb-3">
+                                <i class="font-sm ti-lock text-grey-500 pe-0"></i>
+                                {{ form.password1 }}
+                            </div>
+                            {{ form.errors.password2 }}
+                            <div class="form-group icon-input mb-1">
+                                <i class="font-sm ti-lock text-grey-500 pe-0"></i>
+                                {{ form.password2 }}
+                            </div>
+
+                            <div class="form-check text-left mb-3">
+                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck2">
+                                <label class="form-check-label font-xsss text-grey-500" for="exampleCheck2">Accept Term and Conditions</label>
+                            </div>
+
+                            <div class="form-group mb-1">
+                                <button type="submit" class="form-control text-center style2-input text-white fw-600 bg-primary-gradiant border-0 p-0 ">Register</button>
+                            </div>
+                        </form>
+                         
+                        <div class="col-sm-12 p-0 text-left">
+                            <h6 class="text-grey-500 font-xsss fw-500 mt-0 mb-0 lh-32">Already have account <a href="{% url 'login' %}" class="fw-700 ms-1">Login</a></h6>
+                        </div>
+                         
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/plugin.js' %}"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    
+</body>
+
+</html>

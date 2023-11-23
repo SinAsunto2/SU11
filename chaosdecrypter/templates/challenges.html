@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block navigation_left %}{% endblock navigation_left %}
+
+{% block content %}
+
+<div class="row mx-auto">       
+    <div class="col-lg-12 position-relative">
+        <div class="chat-wrapper pt-0 w-100 position-relative scroll-bar bg-white theme-dark-bg">
+            <div class="chat-body p-3 ">
+                <div class="messages-content pb-5">
+
+                    <div class="message-item">
+                        <div class="message-user">
+                            <figure class="avatar">
+                                <img src="{{avatar_bot}}" alt="image">
+                            </figure>
+                            <div>
+                                <h5>Libur</h5>
+                            </div>
+                        </div>
+                        {% if has_previos_interaction is False %}
+                        <div class="message-wrap">
+                            <p>¡Saludos! Qué gusto verte por aquí. 🌟</p>
+                            <p>Soy Libur, tu compañero virtual. Estoy aquí para guiarte a través de emocionantes desafíos y misterios. 🤖✨</p>
+                            <p>Aquí tienes un adelanto de lo que te espera:</p>
+                            ➜ Experimenta <strong>{{user_state.all_challenges}}</strong> retos intrigantes que pondrán a prueba tu astucia. 🧠🔍<br>
+                            ➜ Descubre <strong>{{user_state.all_secrets}}</strong> secretos ocultos que te llevarán a rincones inexplorados. 🗝️🌄<br><br>
+                            <p>Para comenzar, escribe la palabra clave: <strong>RETO1</strong></p>
+                            <p>Una vez que escribas la palabra clave, recibirás tu primer reto. ¡Buena suerte! 🍀🎉</p>
+                        </div>
+                        {% else %}
+                        <div class="message-wrap">
+                            <p>¡Hola de nuevo! 🌟</p>
+                            <p>Has progresado en SU11 completando <strong>{{user_state.all_completed_challenges}}</strong> de los <strong>{{user_state.all_challenges}}</strong> retos disponibles. 🚀<br>
+                            Además, has descubierto  <strong>{{user_state.all_completed_secrets}}</strong> de los <strong>{{user_state.all_secrets}}</strong> secretos. 🔑<br>
+                            Con un total de <strong>{{user.score}}</strong> puntos, te encuentras en la posición <strong>{{user_ranking_position}}</strong> en el ranking. 🏆<br>
+                            ¡Sigue así! 🦾</p>
+
+                            {% if user_state.next_challenge %}
+                                <p>¡Ey, veo que tienes un reto pendiente! 😊 Ingresa la palabra clave <strong>{{user_state.next_challenge.keyword}}</strong> y démosle inicio. 🚀✨</p>
+                            {% else %}
+                                <p>¡Impresionante! Has superado todos los retos disponibles. 🌟 Por ahora, relájate y estate atento, pronto llegarán más desafíos emocionantes. ✨ ¡Estamos trabajando en nuevos retos para ti! 🎉🔥</p>
+                            {% endif %}
+
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    {% comment %} <div class="message-item outgoing-message">
+                        <div class="message-user">
+                            <figure class="avatar">
+                                <img src="{{user.profile_picture.url}}" alt="image">
+                            </figure>
+                            <div>
+                                <h5>{{ user.username|title }}</h5>
+                            </div>
+                        </div>
+                        <div class="message-wrap">...</div>
+                    </div> {% endcomment %}
+
+                    <div class="clearfix"></div>
+
+                </div>
+            </div>
+        </div>
+
+        <form class="chat-form" id='challengeForm' method='post'>
+            {% csrf_token %}
+            <div class="chat-bottom dark-bg p-3 shadow-none d-flex justify-content-center align-items-center">
+                <div class="form-group">
+                    <input type="text" name="user_response" id="userResponse" placeholder="Write your message..." required>
+                </div>
+                <button type="submit" id="submitBtn" class="bg-current"><i class="ti-arrow-right text-white"></i></button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+    document.getElementById('challengeForm').addEventListener('submit', function(event) {
+        // Prevenir el comportamiento por defecto del formulario (recargar la página)
+        event.preventDefault();
+
+        // Obtener la respuesta del usuario
+        var userResponse = document.getElementById('userResponse').value;
+
+        // Enviar la respuesta del usuario
+        sendUserResponse(userResponse);
+    });
+    
+    function sendUserResponse(userResponse) {
+        const csrfToken = Cookies.get('csrftoken');
+    
+        $.ajax({
+            type: 'POST',
+            url: '/users_response/',
+            data: {'user_response': userResponse},
+            headers: {
+                "X-CSRFToken": csrfToken
+            },
+            success: function(response) {
+                console.log(response);
+
+                var userMessageHtml = `
+                    <div class="message-item outgoing-message">
+                        <div class="message-user">
+                            <figure class="avatar">
+                                <img src="{{user.profile_picture.url}}" alt="image">
+                            </figure>
+                            <div>
+                                <h5>{{ user.username|title }}</h5>
+                            </div>
+                        </div>
+                        <div class="message-wrap">${userResponse}</div>
+                    </div>
+                `;
+
+                var chatContent = document.querySelector('.messages-content');
+                chatContent.innerHTML += userMessageHtml;
+
+                var botMessageHtml = `
+                    <div class="message-item">
+                        <div class="message-user">
+                            <figure class="avatar">
+                                <img src="{{avatar_bot}}" alt="image">
+                            </figure>
+                            <div>
+                                <h5>Libur</h5>
+                            </div>
+                        </div>
+                        <div class="message-wrap">${response.message}</div>
+                        ${response.challenge_image
+                            ? `<figure><img src="${response.challenge_image}" class="img-fluid rounded-3 mt-2" alt="Challenge Image"></figure>`
+                            : ''
+                        }
+                    </div>
+                `;
+
+                chatContent.innerHTML += botMessageHtml;
+                document.getElementById('userResponse').value = '';
+                chatContent.scrollIntoView({block: "end"});
+            },
+            error: function(error) {
+                console.error(error);
+            }
+        });
+    }
+</script>
+
+
+{% endblock content %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block navigation_left %} {% endblock navigation_left %}
+
+
+{% block content %}
+
+{% comment %} <div class="container">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-xl-8 align-items-center d-flex bg-transparent rounded-3 overflow-hidden">
+            <div class="card shadow-none border-0 ps-lg--5 me-auto">
+                <div class="card-body rounded-0 mx-4 text-left pt-md-5 mt-md-5 ps-0 pe-0">
+                    <p>Bienvenido a SU11, tu plataforma de desafíos y descubrimientos. 🌐💡</p>
+                    <p>En SU11, nos apasiona estimular tu ingenio y curiosidad. Aquí encontrarás una serie de desafíos que te invitan a explorar, aprender y superarte. Cada reto es una oportunidad para desvelar misterios y demostrar tu astucia.</p>
+                    <p>¿Estás listo para sumergirte en esta emocionante odisea? ¡Explora, descifra y conquista en SU11! 🚀🔍</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}
+
+<div class="row d-flex justify-content-center align-items-center">
+    <div class="col-xl-8">
+        <div class="card w-100 border-0 p-0 bg-white shadow-xss rounded-xxl">
+            <div class="card-body h250 p-0 rounded-xxl overflow-hidden m-3"><img src="{% static 'img/logo.png' %}" alt="image" class="w-100"></div>
+            <div class="card-body rounded-0 mx-4 text-center ps-0 pe-0">
+                <p>Te damos la bienvenida a un lugar donde la curiosidad es la protagonista. 🌐<b>💡</b></p>
+                <p>Aquí encontrarás una serie de desafíos que te invitan a explorar, aprender y superarte. Pero eso no es todo, también hay secretos ocultos que aguardan ser descubiertos (atento a los detalles).</p>
+                <p>Embárcate en una travesía de enigmas y secretos, descubre el placer de desvelar lo desconocido. ¿Listo para sumergirte en esta emocionante aventura? 🚀🔍 ¡Explora, descifra y conquista en SU11! 🌟</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

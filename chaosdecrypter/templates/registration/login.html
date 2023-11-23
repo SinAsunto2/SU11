@@ -1,0 +1,166 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} Login | SU11 {% endblock title%}</title>
+
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body class="color-theme-red">
+
+    <div class="preloader"></div>
+
+    <div class="main-wrap">
+
+        <div class="nav-header bg-transparent shadow-none border-0">
+            <div class="nav-top w-100">
+                <span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xxl logo-text mb-0">SU11. </span>
+            </div>    
+        </div>
+
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-xl-4 vh-100 align-items-center d-flex bg-white rounded-3 overflow-hidden">
+                <div class="card shadow-none border-0 ms-auto me-auto login-card">
+                    <div class="card-body rounded-0 text-left">
+                        <h2 class="fw-700 font-xl display2-md-size mb-4 text-center">Login into your account</h2>
+                        {% if messages %}
+                        <ul class="text-center my-2 font-sm fw-600" style="color: tomato;" >
+                            {% for message in messages %}
+                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        <form method="post">
+                            {% csrf_token %}
+                            
+                            <div class="form-group icon-input mb-3">
+                                <i class="font-sm ti-user text-grey-500 pe-0"></i>
+                                {{login_form.username}}
+                            </div>
+                            <div class="form-group icon-input mb-1">
+                                <i class="font-sm ti-lock text-grey-500 pe-0"></i>
+                                {{login_form.password}}
+                            </div>
+                            
+                            <div class="form-check text-left mb-3">
+                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck5">
+                                <label class="form-check-label font-xsss text-grey-500" for="exampleCheck5">Remember me</label>
+                                <a href="forgot.html" class="fw-600 font-xsss text-grey-700 mt-1 float-right">Forgot your Password?</a>
+                            </div>
+
+                            <div class="form-group mb-1">
+                                <button class="form-control text-center style2-input text-white fw-600 bg-primary-gradiant border-0 p-0 ">Login</button>
+                            </div>
+                        </form>
+                         
+                        <div class="col-sm-12 p-0 text-left">
+                            <h6 class="text-grey-500 font-xsss fw-500 mt-0 mb-0 lh-32">Dont have account <a href="{% url 'register' %}" class="fw-700 ms-1">Register</a></h6>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Login -->
+    <div class="modal bottom fade" style="overflow-y: scroll;" id="Modallogin" tabindex="-1" role="dialog">
+         <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content border-0">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="ti-close text-grey-500"></i></button>
+                <div class="modal-body p-3 d-flex align-items-center bg-none">
+                    <div class="card shadow-none rounded-0 w-100 p-2 pt-3 border-0">
+                        <div class="card-body rounded-0 text-left p-3">
+                            <h2 class="fw-700 display1-size display2-md-size mb-4">Login into <br>your account</h2>
+                            <form>
+                                
+                                <div class="form-group icon-input mb-3">
+                                    <i class="font-sm ti-email text-grey-500 pe-0"></i>
+                                    <input type="text" class="style2-input ps-5 form-control text-grey-900 font-xsss fw-600" placeholder="Your Email Address">                        
+                                </div>
+                                <div class="form-group icon-input mb-1">
+                                    <input type="Password" class="style2-input ps-5 form-control text-grey-900 font-xss ls-3" placeholder="Password">
+                                    <i class="font-sm ti-lock text-grey-500 pe-0"></i>
+                                </div>
+                                <div class="form-check text-left mb-3">
+                                    <input type="checkbox" class="form-check-input mt-2" id="exampleCheck2">
+                                    <label class="form-check-label font-xsss text-grey-500" for="exampleCheck2">Remember me</label>
+                                    <a href="forgot.html" class="fw-600 font-xsss text-grey-700 mt-1 float-right">Forgot your Password?</a>
+                                </div>
+                            </form>
+                             
+                            <div class="col-sm-12 p-0 text-left">
+                                <div class="form-group mb-1"><a href="#" class="form-control text-center style2-input text-white fw-600 bg-primary-gradiant border-0 p-0 ">Login</a></div>
+                                <h6 class="text-grey-500 font-xsss fw-500 mt-0 mb-0 lh-32">Dont have account <a href="register.html" class="fw-700 ms-1">Register</a></h6>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Register -->
+    <div class="modal bottom fade" style="overflow-y: scroll;" id="Modalregister" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content border-0">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="ti-close text-grey-500"></i></button>
+                <div class="modal-body p-3 d-flex align-items-center bg-none">
+                    <div class="card shadow-none rounded-0 w-100 p-2 pt-3 border-0">
+                        <div class="card-body rounded-0 text-left p-3">
+                            <h2 class="fw-700 display1-size display2-md-size mb-4">Create <br>your account</h2>                        
+                            <form>
+                                
+                                <div class="form-group icon-input mb-3">
+                                    <i class="font-sm ti-user text-grey-500 pe-0"></i>
+                                    <input type="text" class="style2-input ps-5 form-control text-grey-900 font-xsss fw-600" placeholder="Your Name">                        
+                                </div>
+                                <div class="form-group icon-input mb-3">
+                                    <i class="font-sm ti-email text-grey-500 pe-0"></i>
+                                    <input type="text" class="style2-input ps-5 form-control text-grey-900 font-xsss fw-600" placeholder="Your Email Address">                        
+                                </div>
+                                <div class="form-group icon-input mb-3">
+                                    <input type="Password" class="style2-input ps-5 form-control text-grey-900 font-xss ls-3" placeholder="Password">
+                                    <i class="font-sm ti-lock text-grey-500 pe-0"></i>
+                                </div>
+                                <div class="form-group icon-input mb-1">
+                                    <input type="Password" class="style2-input ps-5 form-control text-grey-900 font-xss ls-3" placeholder="Confirm Password">
+                                    <i class="font-sm ti-lock text-grey-500 pe-0"></i>
+                                </div>
+                                <div class="form-check text-left mb-3">
+                                    <input type="checkbox" class="form-check-input mt-2" id="exampleCheck3">
+                                    <label class="form-check-label font-xsss text-grey-500" for="exampleCheck3">Accept Term and Conditions</label>
+                                    <!-- <a href="#" class="fw-600 font-xsss text-grey-700 mt-1 float-right">Forgot your Password?</a> -->
+                                </div>
+                            </form>
+                             
+                            <div class="col-sm-12 p-0 text-left">
+                                <div class="form-group mb-1"><a href="#" class="form-control text-center style2-input text-white fw-600 bg-primary-gradiant border-0 p-0 ">Register</a></div>
+                                <h6 class="text-grey-500 font-xsss fw-500 mt-0 mb-0 lh-32">Already have account <a href="login.html" class="fw-700 ms-1">Login</a></h6>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="{% static 'js/plugin.js' %}"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    
+</body>
+
+</html>

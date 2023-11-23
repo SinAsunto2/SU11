@@ -1,0 +1,320 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} SU11 {% endblock title%}</title>
+
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/logo.png' %}">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/emoji.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css" integrity="sha512-OTcub78R3msOCtY3Tc6FzeDJ8N9qvQn1Ph49ou13xgA9VsH9+LRxoFU6EqLhW4+PKRfU+/HReXmSZXHEkpYoOA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body class="color-theme-red mont-font">
+
+    <div class="preloader"></div>
+
+    <div class="main-wrapper">
+
+        <!-- navigation top-->
+        <div class="nav-header bg-white shadow-xs border-0">
+            <div class="nav-top">
+                <a href="{% url 'index' %}">
+                    <span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xxl logo-text mb-0">SU11</span> 
+                </a>
+                <a href="#" class="mob-menu ms-auto me-2 chat-active-btn">
+                    <span class="text-grey-900 font-sm btn-round-md bg-greylight">
+                        <i width="20px" height="20px" data-feather="message-circle"></i>
+                    </span>
+                </a>
+                <a href="default-video.html" class="mob-menu me-2">
+                    <span class="text-grey-900 font-sm btn-round-md bg-greylight">
+                        <i width="20px" height="20px" data-feather="video"></i>
+                    </span>
+                </a>
+                <a href="#" class="me-2 menu-search-icon mob-menu">
+                    <span class="text-grey-900 font-sm btn-round-md bg-greylight">
+                        <i width="20px" height="20px" data-feather="search"></i>
+                    </span>
+                </a>
+                <button class="nav-menu me-0 ms-2"></button>
+            </div>
+
+            <div class="mx-auto">
+                <a href="{% url 'index' %}" class="p-2 text-center ms-3 menu-icon center-menu-icon">
+                    <span class="{% if active_page == 'index' %} alert-primary text-current {% else %} bg-greylight text-grey-500 {% endif %} btn-round-lg theme-dark-bg">
+                        <i width="25px" height="25px" data-feather="home"></i>
+                    </span>
+                </a>
+                <a href="{% url 'challenges' %}" class="p-2 text-center ms-0 menu-icon center-menu-icon">
+                    <span class="{% if active_page == 'challenges' %} alert-primary text-current {% else %} bg-greylight text-grey-500 {% endif %} btn-round-lg theme-dark-bg">
+                        <i width="25px" height="25px" data-feather="key"></i>
+                    </span>
+                </a>
+                <a href="{% url 'ranking' %}" class="p-2 text-center ms-0 menu-icon center-menu-icon">
+                    <span class="{% if active_page == 'ranking' %} alert-primary text-current {% else %} bg-greylight text-grey-500 {% endif %} btn-round-lg theme-dark-bg">
+                        <i width="25px" height="25px" data-feather="bar-chart-2"></i>
+                    </span>
+                </a>
+                <a href="{% url 'edit_profile' %}" class="p-2 text-center ms-0 menu-icon center-menu-icon">
+                    <span class="{% if active_page == 'profile' %} alert-primary text-current {% else %} bg-greylight text-grey-500 {% endif %} btn-round-lg theme-dark-bg">
+                        <i width="25px" height="25px" data-feather="user"></i>
+                    </span>
+                </a>
+                <a href="" class="p-2 text-center ms-0 menu-icon center-menu-icon">
+                    <span class="{% if active_page == 'star' %} alert-primary text-current {% else %} bg-greylight text-grey-500 {% endif %} btn-round-lg theme-dark-bg">
+                        <i width="25px" height="25px" data-feather="star"></i>
+                    </span>
+                </a>
+            </div>
+
+            <div class="p-2 text-center nav-ms-10 position-relative dropdown-menu-icon menu-icon cursor-pointer">
+                <span class="animation-spin d-inline-block text-current">
+                    <i width="28px" height="28px" data-feather="settings"></i>
+                </span>
+                <div class="dropdown-menu-settings switchcolor-wrap">
+                    <h4 class="fw-700 font-sm mb-4">Settings</h4>
+                    <h6 class="font-xssss text-grey-500 fw-700 mb-3 d-block">Choose Color Theme</h6>
+                    <ul>
+                        <li>
+                            <label class="item-radio item-content">
+                                <input type="radio" name="color-radio" value="red" checked><i class="ti-check"></i>
+                                <span class="circle-color bg-red" style="background-color: #ff3b30;"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="item-radio item-content">
+                                <input type="radio" name="color-radio" value="green"><i class="ti-check"></i>
+                                <span class="circle-color bg-green" style="background-color: #4cd964;"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="item-radio item-content">
+                                <input type="radio" name="color-radio" value="blue"><i class="ti-check"></i>
+                                <span class="circle-color bg-blue" style="background-color: #132977;"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="item-radio item-content">
+                                <input type="radio" name="color-radio" value="pink"><i class="ti-check"></i>
+                                <span class="circle-color bg-pink" style="background-color: #ff2d55;"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="item-radio item-content">
+                                <input type="radio" name="color-radio" value="yellow"><i class="ti-check"></i>
+                                <span class="circle-color bg-yellow" style="background-color: #ffcc00;"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="item-radio item-content">
+                                <input type="radio" name="color-radio" value="orange"><i class="ti-check"></i>
+                                <span class="circle-color bg-orange" style="background-color: #ff9500;"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="item-radio item-content">
+                                <input type="radio" name="color-radio" value="gray"><i class="ti-check"></i>
+                                <span class="circle-color bg-gray" style="background-color: #8e8e93;"></span>
+                            </label>
+                        </li>
+
+                        <li>
+                            <label class="item-radio item-content">
+                                <input type="radio" name="color-radio" value="brown"><i class="ti-check"></i>
+                                <span class="circle-color bg-brown" style="background-color: #D2691E;"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="item-radio item-content">
+                                <input type="radio" name="color-radio" value="darkgreen"><i class="ti-check"></i>
+                                <span class="circle-color bg-darkgreen" style="background-color: #228B22;"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="item-radio item-content">
+                                <input type="radio" name="color-radio" value="deeppink"><i class="ti-check"></i>
+                                <span class="circle-color bg-deeppink" style="background-color: #FFC0CB;"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="item-radio item-content">
+                                <input type="radio" name="color-radio" value="cadetblue"><i class="ti-check"></i>
+                                <span class="circle-color bg-cadetblue" style="background-color: #5f9ea0;"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="item-radio item-content">
+                                <input type="radio" name="color-radio" value="darkorchid"><i class="ti-check"></i>
+                                <span class="circle-color bg-darkorchid" style="background-color: #9932cc;"></span>
+                            </label>
+                        </li>
+                    </ul>
+                    
+                    <div class="card bg-transparent-card border-0 d-block mt-3">
+                        <h4 class="d-inline font-xssss mont-font fw-700">Header Background</h4>
+                        <div class="d-inline float-right mt-1">
+                            <label class="toggle toggle-menu-color"><input type="checkbox"><span class="toggle-icon"></span></label>
+                        </div>
+                    </div>
+                    <div class="card bg-transparent-card border-0 d-block mt-3">
+                        <h4 class="d-inline font-xssss mont-font fw-700">Menu Position</h4>
+                        <div class="d-inline float-right mt-1">
+                            <label class="toggle toggle-menu"><input type="checkbox"><span class="toggle-icon"></span></label>
+                        </div>
+                    </div>
+                    <div class="card bg-transparent-card border-0 d-block mt-3">
+                        <h4 class="d-inline font-xssss mont-font fw-700">Dark Mode</h4>
+                        <div class="d-inline float-right mt-1">
+                            <label class="toggle toggle-dark">
+                                <input type="checkbox" checked> <!-- Agrega el atributo checked si el tema actual es oscuro -->
+                                <span class="toggle-icon"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            {% comment %} <span> {{ user.username|title }} | </span>  {% endcomment %}
+            <a href="#" class="p-0 ms-3 menu-icon" id="dropdownMenuProfile" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{user.profile_picture.url}}" alt="user" class="w40 mt--1 rounded-circle"></a>
+
+            <div class="dropdown-menu dropdown-menu-end p-4 rounded-xxl border-0 shadow-lg" aria-labelledby="dropdownMenuProfile">
+                <div class="card-body p-0 d-flex align-items-center">
+                    <i class="text-grey-500 me-3" width="20px" height="20px" data-feather="settings"></i>
+                    <a  href="#" class="fw-600 text-grey-900 font-xssss mt-1 me-4">Settings</span></a>
+                </div>
+                <div class="card-body p-0 d-flex align-items-center mt-2">
+                    <i class="text-grey-500 me-3" width="20px" height="20px" data-feather="lock"></i>
+                    <a  href="{% url 'logout' %}" class="fw-600 text-grey-900 font-xssss mt-1 me-4">Logout</span></a>
+                </div>
+            </div>
+            
+        </div>
+        <!-- navigation top -->
+
+        {% block navigation_left %}
+        <!-- navigation left -->
+        <nav class="navigation scroll-bar">
+            <div class="container ps-0 pe-0">
+                <div class="nav-content">
+
+                    <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1 mb-2 mt-2">
+                        <div class="nav-caption fw-600 font-xssss text-grey-500 text-center">In this chat:</div>
+                        <ul class="mb-1 top-content">
+                            
+                            <li>
+                                <a href="default.html" class="nav-content-bttn open-font">
+                                    <figure class="avatar mx-3 mb-0 position-relative w50 z-index-1">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="image" class="float-right p-6 bg-white rounded-circle w-100">
+                                    </figure>
+                                    <span>Surfiya</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="default-badge.html" class="nav-content-bttn open-font">
+                                    <figure class="avatar mx-3 mb-0 position-relative w50 z-index-1">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="image" class="float-right p-6 bg-white rounded-circle w-100">
+                                    </figure>
+                                    <span>Surfiya</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="default-storie.html" class="nav-content-bttn open-font">
+                                    <figure class="avatar mx-3 mb-0 position-relative w50 z-index-1">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="image" class="float-right p-6 bg-white rounded-circle w-100">
+                                    </figure>
+                                    <span>Surfiya</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="default-group.html" class="nav-content-bttn open-font">
+                                    <figure class="avatar mx-3 mb-0 position-relative w50 z-index-1">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="image" class="float-right p-6 bg-white rounded-circle w-100">
+                                    </figure>
+                                    <span>Surfiya</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="user-page.html" class="nav-content-bttn open-font">
+                                    <figure class="avatar mx-3 mb-0 position-relative w50 z-index-1">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="image" class="float-right p-6 bg-white rounded-circle w-100">
+                                    </figure>
+                                    <span>Surfiya</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="user-page.html" class="nav-content-bttn open-font">
+                                    <figure class="avatar mx-3 mb-0 position-relative w50 z-index-1">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="image" class="float-right p-6 bg-white rounded-circle w-100">
+                                    </figure>
+                                    <span>Surfiya</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="user-page.html" class="nav-content-bttn open-font">
+                                    <figure class="avatar mx-3 mb-0 position-relative w50 z-index-1">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="image" class="float-right p-6 bg-white rounded-circle w-100">
+                                    </figure>
+                                    <span>Surfiya</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="user-page.html" class="nav-content-bttn open-font">
+                                    <figure class="avatar mx-3 mb-0 position-relative w50 z-index-1">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="image" class="float-right p-6 bg-white rounded-circle w-100">
+                                    </figure>
+                                    <span>Surfiya</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+        <!-- navigation left -->
+        {% endblock navigation_left %}
+
+        <!-- main content -->
+        <div class="main-content d-flex justify-content-between align-items-center">
+            
+            <div class="middle-sidebar-bottom">
+                <div class="middle-sidebar-left">
+                    {% block content %} {% endblock content%}
+                </div>
+            </div>
+        </div>
+        <!-- main content -->
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+
+    <script src="{% static 'js/plugin.js' %}"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+
+    <!-- choose one -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+    <script>feather.replace();</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="{% static 'js/m7spm4o5f554g4jihwdsu11.js' %}"></script>
+</body>
+
+</html>
